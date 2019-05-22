@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 id="question"></h1>
+    <h1>Score is <span id='score'></span></h1>
+
+
+    <script>
+        // create an array of objects
+        // each object should have a q: question, a: answer
+        const $question = document.getElementById('question');
+        const $score = document.getElementById('score');
+
+
+        const questions = [
+            { q: 'Are you a morning person?', a: 'f' },
+            { q: 'Is 60hz refresh rate better than 144hz refresh rate?', a: 'f' },
+            { q: 'What is the meaning of life?', a: 'f' },
+            { q: 'Are there 16oz in a pint?', a: 't' },
+            { q: 'Is the Atlantic Ocean, the world\'s largest ocean.', a: 'f' }
+        ];
+
+        // variable for keeping score.
+        let score = 0;
+        // var index
+        let questionIndex = 0;
+
+
+
+        // create a function for rendering the current question
+        const renderQuestion = () => {
+            if (questionIndex < questions.length) {
+                $question.textContent = questions[questionIndex].q;
+            } else {
+                $question.textContent = `Game over`;
+                $score.textContent = `Your final score is ${score}`;
+            }
+        };
+
+
+
+        // create a function for updating the score
+
+        const renderScore = () => {
+            $score.textContent = score;
+        }
+
+
+        // call render question
+        renderQuestion();
+        // call render Score
+        renderScore();
+
+
+        // onkeyup if the user lets go of t or f
+        document.onkeyup = (event) => {
+            if (questionIndex === questions.length) {
+                return;
+            }
+
+            const userInput = event.key.toLowerCase();
+
+            if (userInput === 't' || userInput === 'f') {
+                if (questions[questionIndex].a === userInput) {
+                    score++;
+                    renderScore();
+                } else {
+                    alert("WRONG!!!!");
+                }
+
+                questionIndex++;
+                renderQuestion();
+            }
+        }
+    //  check to see if that is the answer to the current question
+     //  if they're wrong
+        // alert a message to them that says you're wrong.
+
+    </script>
+</body>
+
+</html>
